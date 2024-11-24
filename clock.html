@@ -3,32 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clock</title>
+    <title>Flip Clock</title>
     <style>
         body {
             margin: 0;
-            overflow: hidden;
-            background-color: transparent;
-            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background-color: black; /* Change for transparency if needed */
             color: white;
-            font-size: 48px;
+            font-family: Arial, sans-serif;
+        }
+
+        .clock {
+            display: flex;
+            gap: 10px;
+        }
+
+        .flip {
+            position: relative;
+            width: 60px;
+            height: 90px;
+            perspective: 1000px;
+        }
+
+        .flip .top,
+        .flip .bottom {
+            width: 100%;
+            height: 50%;
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            border: 1px solid #555;
+        }
+
+        .flip .top {
+            border-bottom: 1px solid #111;
+            border-radius: 5px 5px 0 0;
+            transform-origin: bottom;
+        }
+
+        .flip .bottom {
+            border-top: 1px solid #111;
+            border-radius: 0 0 5px 5px;
+            transform-origin: top;
+        }
+
+        .flip .top-flip,
+        .flip .bottom-flip {
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            background-color: #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            backface-visibility: hidden;
+        }
+
+        .flip .top-flip {
+            transform-origin: bottom;
+            transform: rotateX(0deg);
+        }
+
+        .flip .bottom-flip {
+            transform-origin: top;
+            transform: rotateX(90deg);
+        }
+
+        .flip.animating .top-flip {
+            animation: flipTop 0.5s linear forwards;
+        }
+
+        .flip.animating .bottom-flip {
+            animation: flipBottom 0.5s linear forwards 0.5s;
+        }
+
+        @keyframes flipTop {
+            0% { transform: rotateX(0deg); }
+            100% { transform: rotateX(-90deg); }
+        }
+
+        @keyframes flipBottom {
+            0% { transform: rotateX(90deg); }
+            100% { transform: rotateX(0deg); }
         }
     </style>
 </head>
 <body>
-    <div id="clock"></div>
+    <div class="clock">
+        <div class="flip" data-digit="0">
+            <div class="top">0</div>
+            <div class="bottom">0</div>
+            <div class="top-flip"></div>
+            <div class="bottom-flip"></div>
+        </div>
+        <div class="flip" data-digit="0">
+            <div class="top">0</div>
+            <div class="bottom">0</div>
+            <div class="top-flip"></div>
+            <div class="bottom-flip"></div>
+        </div>
+        <div class="flip" data-digit=":">
+            <div class="top">:</div>
+            <div class="bottom">:</div>
+        </div>
+        <div class="flip" data-digit="0">
+            <div class="top">0</div>
+            <div class="bottom">0</div>
+            <div class="top-flip"></div>
+            <div class="bottom-flip"></div>
+        </div>
+        <div class="flip" data-digit="0">
+            <div class="top">0</div>
+            <div class="bottom">0</div>
+            <div class="top-flip"></div>
+            <div class="bottom-flip"></div>
+        </div>
+    </div>
 
     <script>
         function updateClock() {
             const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+            const time = [
+                String(now.getHours()).padStart(2, '0'),
+                String(now.getMinutes()).padStart(2, '0')
+            ].join(':').split('');
+
+            const flips = document.querySelectorAll('.flip');
+            flips.forEach((flip, i) => {
+                const current = flip.dataset.digit;
+                const next = time[i];
+                if (current !== next) {
+                    flip.dataset.digit = next;
+
+                    const topFlip = flip.querySelector('.top-flip');
+                    const bottomFlip = flip.querySelector('.bottom-flip');
+                    const top = flip.querySelector('.top');
+                    const bottom = flip.querySelector('.bottom');
+
+                    top.textContent = current;
+                    bottom.textContent = current;
+                    topFlip.textContent = next;
+                    bottomFlip.textContent = next;
+
+                    flip.classList.remove('animating');
+                    void flip.offsetWidth; // Trigger reflow for animation reset
+                    flip.classList.add('animating');
+                }
+            });
         }
 
         setInterval(updateClock, 1000);
