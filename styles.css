@@ -12,12 +12,13 @@ body {
   font-family: 'Orbitron', sans-serif;
 }
 
+/* Base title style */
 .title {
   font-size: 4rem; /* Increase the font size significantly */
-  font-weight: bold; /* Make the title bold */
-  text-align: center; /* Center the title */
-  margin-bottom: 2rem; /* Add more space below the title */
-  transition: color 0.5s ease; /* Add a color transition */
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+  transition: color 0.5s ease;
 }
 
 .flip-clock {
@@ -122,22 +123,22 @@ body {
   animation: flipBottom 0.6s cubic-bezier(.15,.45,.28,1);
 }
 
-/* More Specific Theme Styles for Title */
 .flip-clock.theme-morning .title {
-  color: #FFA500; /* Orange for morning */
+  color: #FFA500 !important; /* Orange for morning */
 }
 
 .flip-clock.theme-afternoon .title {
-  color: #FF6347; /* Tomato for afternoon */
+  color: #FF6347 !important; /* Tomato for afternoon */
 }
 
 .flip-clock.theme-evening .title {
-  color: #FFD700; /* Gold for evening */
+  color: #FFD700 !important; /* Gold for evening */
 }
 
 .flip-clock.theme-night .title {
-  color: #1E90FF; /* Dodger Blue for night */
+  color: #1E90FF !important; /* Dodger Blue for night */
 }
+
 
 @keyframes flipTop {
   0% {

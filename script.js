@@ -83,40 +83,41 @@ function Clock(callback) {
 function updateTheme() {
     const hour = new Date().getHours();
     const clockElement = document.querySelector('.flip-clock');
-    const titleEl = document.querySelector('#timeTitle'); // Change from titleElement to titleEl
-  
-    // Reset classes for both clock and title
+    const titleEl = document.querySelector('#timeTitle'); // Referencing the title element
+
+    // Reset the clock and title classes to avoid stacking old themes
     clockElement.className = 'flip-clock';
     titleEl.className = 'title';
   
-    // Determine the theme class and title text
+    // Determine the appropriate theme and title text based on the hour
     let themeClass = '';
     let titleText = '';
     if (hour >= 6 && hour < 12) {
       themeClass = 'theme-morning';
       titleText = 'Morning Grind';
+      document.querySelector("#timeTitle").style.color = "#FFA500"; // Bad code practice, but it works
     } else if (hour >= 12 && hour < 18) {
       themeClass = 'theme-afternoon';
       titleText = 'Afternoon Grind';
+      document.querySelector("#timeTitle").style.color = "#FF6347" // Bad code practice, but it works
     } else if (hour >= 18 && hour < 21) {
       themeClass = 'theme-evening';
       titleText = 'Evening Grind';
+      document.querySelector("#timeTitle").style.color = "#FFD700" // Bad code practice, but it works
     } else {
       themeClass = 'theme-night';
       titleText = 'Late Night Grind';
+      document.querySelector("#timeTitle").style.color = "#1E90FF" // Bad code practice, but it works
     }
   
-    // Apply the theme to the clock and title elements
+    // Apply the theme to both the clock and title
     clockElement.classList.add(themeClass);
     titleEl.classList.add(themeClass);
   
-    // Update the title text explicitly
+    // Set the title text
     titleEl.textContent = titleText;
-  
-    // Debugging output to verify theme and class application
-    console.log('Applied Theme:', themeClass);
-    console.log('Updated Title:', titleText);
 }
+
 
   
   // Initialize the title and append it to the document
