@@ -4,7 +4,8 @@ console.clear();
 function CountdownTracker(label, value) {
   var el = document.createElement('span');
   el.className = 'flip-clock__piece';
-  el.innerHTML = '<b class="flip-clock__card card"><b class="card__top"></b><b class="card__bottom"></b><b class="card__back"><b class="card__bottom"></b></b></b>' + label + '</span>';
+  // Label is not used in this version
+  el.innerHTML = '<b class="flip-clock__card card"><b class="card__top"></b><b class="card__bottom"></b><b class="card__back"><b class="card__bottom"></b></b></b></span>';
 
   this.el = el;
 
@@ -78,6 +79,63 @@ function Clock(callback) {
   setTimeout(updateClock, 500);
 }
 
-// Initialize the regular clock
-var clock = new Clock();
-document.body.appendChild(clock.el);
+// Function to dynamically update the theme and title
+function updateTheme() {
+    const hour = new Date().getHours();
+    const clockElement = document.querySelector('.flip-clock');
+    const titleEl = document.querySelector('#timeTitle'); // Change from titleElement to titleEl
+  
+    // Reset classes for both clock and title
+    clockElement.className = 'flip-clock';
+    titleEl.className = 'title';
+  
+    // Determine the theme class and title text
+    let themeClass = '';
+    let titleText = '';
+    if (hour >= 6 && hour < 12) {
+      themeClass = 'theme-morning';
+      titleText = 'Morning Grind';
+    } else if (hour >= 12 && hour < 18) {
+      themeClass = 'theme-afternoon';
+      titleText = 'Afternoon Grind';
+    } else if (hour >= 18 && hour < 21) {
+      themeClass = 'theme-evening';
+      titleText = 'Evening Grind';
+    } else {
+      themeClass = 'theme-night';
+      titleText = 'Late Night Grind';
+    }
+  
+    // Apply the theme to the clock and title elements
+    clockElement.classList.add(themeClass);
+    titleEl.classList.add(themeClass);
+  
+    // Update the title text explicitly
+    titleEl.textContent = titleText;
+  
+    // Debugging output to verify theme and class application
+    console.log('Applied Theme:', themeClass);
+    console.log('Updated Title:', titleText);
+}
+
+  
+  // Initialize the title and append it to the document
+  const titleEl = document.createElement('div');
+  titleEl.id = 'timeTitle';
+  titleEl.className = 'title';
+  document.body.insertBefore(titleEl, document.body.firstChild);
+  
+  // Initialize the clock
+  var clock = new Clock();
+  document.body.appendChild(clock.el);
+  
+  // Initial theme setup
+  updateTheme();
+
+  // Force reflow by accessing offsetHeight (or any other property that forces layout reflow)
+  titleEl.offsetHeight;  // Trigger reflow
+  // Then reapply the class to force style recalculation
+  titleEl.classList.add('theme-morning');
+  
+  // Update the theme every 15 minutes
+  setInterval(updateTheme, 900000); // 15 minutes = 900,000 ms
