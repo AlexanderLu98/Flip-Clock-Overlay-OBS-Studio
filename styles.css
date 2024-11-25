@@ -9,6 +9,7 @@ body {
   justify-content: center;
   align-items: center;
   background: #EEE;
+  font-family: 'Orbitron', sans-serif;
 }
 
 .flip-clock {
@@ -60,6 +61,7 @@ body {
   transform-style: preserve-3d;
   width: 2em; /* Still using em for intrinsic sizing */
   transform: translateZ(0);
+  font-family: 'Orbitron', sans-serif;
 }
 
 .card__bottom {
