@@ -38,16 +38,40 @@ function getTime() {
   var t = new Date();
   return {
     'Total': t,
-    'Hours': t.getHours() % 12, // Use 12-hour format
+    'Hours': t.getHours(), // Use 12-hour format:add %12
     'Minutes': t.getMinutes(),
     'Seconds': t.getSeconds()
   };
 }
 
+// Function for title color change
+function updateTextColor(hours) {
+    let color;
+  
+    if (hours >= 6 && hours < 12) {
+      color = '#fcbf49'; // Morning
+    } else if (hours >= 12 && hours < 18) {
+      color = '#f77f00'; // Afternoon
+    } else if (hours >= 18 && hours < 21) {
+      color = '#d62828'; // Evening
+    } else {
+      color = '#003049'; // Night
+    }
+  
+    // Apply the color to the title
+    return color;
+  }
+
 // Clock function: Shows the current time (no countdown)
 function Clock(callback) {
   callback = callback || function() {};
 
+  this.title = document.createElement('h1');
+  this.title.className = 'title';
+  this.title.innerHTML = 'Leetcode Grind';
+  // Update the title color based on the current hour
+  this.title.style.color = updateTextColor(getTime().Hours);
+//   this.title.style.color = 'orange';
   this.el = document.createElement('div');
   this.el.className = 'flip-clock';
 
@@ -80,4 +104,5 @@ function Clock(callback) {
 
 // Initialize the regular clock
 var clock = new Clock();
+document.body.appendChild(clock.title);
 document.body.appendChild(clock.el);

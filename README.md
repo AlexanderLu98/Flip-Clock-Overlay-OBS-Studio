@@ -51,16 +51,15 @@ This project is open-source, and you are free to use and modify it as needed for
   - **Evening Grind**: 18:00 - 24:00
 
 ## Funny Times
-- **04:20**: A fun time for humor.
+- **04:20**: Nuff said
 - **13:37**: LEET time (1337).
 - **03:33**: Spooky time.
 - **04:04**: Error Not Found.
 - **500**: Internal Server Error.
 - **12:34:56**: A satisfying sequence of numbers in order.
-- **007**: James Bond reference.
 - **03:14**: Pi time (3.14).
 - **Byte Time**: 256.
-- **Palindrome Time**: A time that reads the same forwards and backwards.
+- **Palindrome Time**: A time that reads the same forwards and backwards. based on seconds
 
 ## Possibilities
 - Option to divide and display each individual digit separately.
