@@ -34,32 +34,36 @@ This project is open-source, and you are free to use and modify it as needed for
 
 # TODO:
 
+## Fix README
+-Create a checklist for todo
+
 ## Font
-- Digital font for time display.
+- Digital font for time display. Done
 
 ## Title
-- Integrated title displayed at the top of the clock.
+- Integrated title displayed at the top of the clock. Done
 
 ## Time Format
-- Automatically detects and adjusts between **military time** or **AM/PM**.
+- Adjusts between **military time** or **AM/PM**. Ensure it not the stream time. 
 
 ## Animations
 - Add animations for specific time ranges:
   - **Late Night Grind**: 24:00 - 06:00
-  - **Early Bird/Morning Grind**: 06:00 - 12:00
+  - **Early Bird Grind**: 06:00 - 12:00
   - **Afternoon Grind**: 12:00 - 18:00
   - **Evening Grind**: 18:00 - 24:00
+- Sun rises on Early Bird and decends on Afternoon
+- Moon rises on Evening Grind and decends on Late Night Grind
 
 ## Funny Times
-- **04:20**: Nuff said
 - **13:37**: LEET time (1337).
-- **03:33**: Spooky time.
 - **04:04**: Error Not Found.
+
+- **04:20**: Nuff said
 - **500**: Internal Server Error.
+- **Byte Time**: 256.
+
 - **12:34:56**: A satisfying sequence of numbers in order.
 - **03:14**: Pi time (3.14).
-- **Byte Time**: 256.
 - **Palindrome Time**: A time that reads the same forwards and backwards. based on seconds
-
-## Possibilities
-- Option to divide and display each individual digit separately.
+- **03:33**: Spooky time.

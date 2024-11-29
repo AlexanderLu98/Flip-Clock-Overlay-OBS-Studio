@@ -47,37 +47,47 @@ function getTime() {
 // Function for title color change
 function updateTextColor(hours) {
     let color;
+    let title;
   
     if (hours >= 6 && hours < 12) {
       color = '#fcbf49'; // Morning
+      title = "Early Bird Grind";
     } else if (hours >= 12 && hours < 18) {
       color = '#f77f00'; // Afternoon
+      title = "Afternoon Grind";
     } else if (hours >= 18 && hours < 21) {
       color = '#d62828'; // Evening
+      title = "Evening Grind";
     } else {
       color = '#003049'; // Night
+      title = "Late Night Grind"
     }
   
     // Apply the color to the title
-    return color;
+    return {
+        'color': color,
+        'title': title
+    };
   }
 
 // Clock function: Shows the current time (no countdown)
 function Clock(callback) {
   callback = callback || function() {};
 
-  this.title = document.createElement('h1');
-  this.title.className = 'title';
-  this.title.innerHTML = 'Leetcode Grind';
-  // Update the title color based on the current hour
-  this.title.style.color = updateTextColor(getTime().Hours);
-//   this.title.style.color = 'orange';
-  this.el = document.createElement('div');
-  this.el.className = 'flip-clock';
-
   var trackers = {},
       t = getTime(),
       key, timeinterval;
+
+  var theme = updateTextColor(t.Hours);
+
+  this.title = document.createElement('h1');
+  this.title.className = "title";
+  this.title.innerHTML = theme.title;
+  // Update the title color based on the current hour
+  this.title.style.color = theme.color;
+//   this.title.style.color = 'orange';
+  this.el = document.createElement('div');
+  this.el.className = 'flip-clock';
 
   // Create the clock elements for hours, minutes, and seconds
   for (key in t) {
